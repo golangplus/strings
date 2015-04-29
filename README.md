@@ -1,5 +1,7 @@
 # strings
-Plus to the standard "strings" package.
+Plus to the standard `strings` package.
+
+[Godoc](http://godoc.org/github.com/golangplus/strings)
 
 ## Featured
 ```go
