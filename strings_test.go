@@ -5,6 +5,7 @@
 package stringsp
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/golangplus/fmt"
@@ -37,4 +38,21 @@ func TestCallbackFieldsFunc(t *testing.T) {
 	})
 
 	assert.Equal(t, "res", res, "|Hello|World|Go")
+}
+
+func ExampleFullJoin() {
+	a := []string{
+		"item1", "item two",
+	}
+	fmt.Println(FullJoin(a, "(", "), (", ")"))
+
+	// OUTPUT:
+	// (item1), (item two)
+}
+
+func TestFullJoin(t *testing.T) {
+	a := []string{
+		"item1", "item two",
+	}
+	assert.Equal(t, "FullJoin", FullJoin(a, "(", "), (", ")"), "(item1), (item two)")
 }

@@ -9,6 +9,8 @@ package stringsp
 
 import (
 	"unicode"
+
+	"github.com/golangplus/bytes"
 )
 
 // CallbackFields calls CallbackFieldsFunc with unicode.IsSpace.
@@ -50,4 +52,31 @@ func CallbackFieldsFunc(s string, isSpace func(rune) bool, prepare func(n int), 
 	if fieldStart >= 0 { // Last field might end at EOF.
 		newField(s[fieldStart:])
 	}
+}
+
+// FullJoin is similar to strings.Join with additional prefix/suffix if a is non-empty.
+func FullJoin(a []string, prefix, sep, suffix string) string {
+	if len(a) == 0 {
+		return ""
+	}
+
+	if len(a) == 1 {
+		return prefix + a[0] + suffix
+	}
+
+	n := len(prefix) + len(sep) + len(suffix)
+	for _, s := range a {
+		n += len(s)
+	}
+
+	buf := make(bytesp.ByteSlice, 0, n)
+	buf.WriteString(prefix)
+	buf.WriteString(a[0])
+	for _, s := range a[1:] {
+		buf.WriteString(sep)
+		buf.WriteString(s)
+	}
+	buf.WriteString(suffix)
+
+	return string(buf)
 }
