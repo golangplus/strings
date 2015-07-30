@@ -56,3 +56,9 @@ func TestFullJoin(t *testing.T) {
 	}
 	assert.Equal(t, "FullJoin", FullJoin(a, "(", "), (", ")"), "(item1), (item two)")
 }
+
+func TestCompare(t *testing.T) {
+	assert.Equal(t, "Compare(abc, def)", Compare("abc", "def"), -1)
+	assert.Equal(t, "Compare(def, ab)", Compare("def", "ab"), 1)
+	assert.Equal(t, "Compare(ab, ab)", Compare("ab", "ab"), 0)
+}

@@ -80,3 +80,14 @@ func FullJoin(a []string, prefix, sep, suffix string) string {
 
 	return string(buf)
 }
+
+// Compares returns -1 if a < b, 1 if a > b, 0 otherwise.
+func Compare(a, b string) int {
+	switch {
+	case a < b:
+		return -1
+	case a > b:
+		return 1
+	}
+	return 0
+}
