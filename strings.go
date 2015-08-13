@@ -69,7 +69,7 @@ func FullJoin(a []string, prefix, sep, suffix string) string {
 		n += len(s)
 	}
 
-	buf := make(bytesp.ByteSlice, 0, n)
+	buf := make(bytesp.Slice, 0, n)
 	buf.WriteString(prefix)
 	buf.WriteString(a[0])
 	for _, s := range a[1:] {
