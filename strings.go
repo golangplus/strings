@@ -23,7 +23,7 @@ func CallbackFields(s string, prepare func(n int), newField func(f string)) {
 // in order. If no fields are found, prepare is called with a zero value.
 //
 // This function is especially useful when we want to split a string into a slice of named types other than
-// string or in a non-slice data structure at all.
+// strings or into a non-slice data structure at all.
 func CallbackFieldsFunc(s string, isSpace func(rune) bool, prepare func(n int), newField func(f string)) {
 	// First count the fields.
 	n := 0
@@ -35,7 +35,6 @@ func CallbackFieldsFunc(s string, isSpace func(rune) bool, prepare func(n int), 
 			n++
 		}
 	}
-
 	// Now create them.
 	prepare(n)
 	fieldStart := -1 // Set to -1 when looking for start of field.

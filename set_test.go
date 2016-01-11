@@ -15,9 +15,6 @@ func TestSet(t *testing.T) {
 	assert.True(t, "set.Contain(david)", set.Contain("david"))
 	assert.False(t, "set.Contain(villa)", set.Contain("villa"))
 
-	assert.True(t, "set.Equal(david, hello)", set.Equal(NewSet("david", "hello")))
-	assert.False(t, "set.Equal(david, hello)", set.Equal(NewSet("hello")))
-
 	set.Delete("david")
 	assert.False(t, "set.Contain(david)", set.Contain("david"))
 	assert.True(t, "set.Equal(hello)", set.Equal(NewSet("hello")))
@@ -31,4 +28,13 @@ func TestSet_nil(t *testing.T) {
 	assert.Equal(t, "nil.Equal(nil)", s.Equal(ss), true)
 	assert.StringEqual(t, "nil.Elements()", s.Elements(), []string{})
 	s.Delete("david")
+}
+
+func TestSet_Equal(t *testing.T) {
+	var set Set
+	set.Add("hello", "david")
+
+	assert.True(t, "set.Equal(david, hello)", set.Equal(NewSet("david", "hello")))
+	assert.False(t, "set.Equal(david, hello)", set.Equal(NewSet("hello")))
+	assert.False(t, "set.Equal(david, hello)", set.Equal(NewSet("sophie", "hello")))
 }

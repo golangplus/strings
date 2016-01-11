@@ -15,35 +15,32 @@ func SliceInsert(s []string, index int, e ...string) []string {
 		// Nothing to insert
 		return s
 	}
-
 	l := len(s)
 	if index == l {
 		return append(s, e...)
 	}
-
-	// Make room for inserted elements.
 	if cap(s) >= l+n {
+		// s has enough room, simply make some copies
 		s = s[:l+n]
 		copy(s[index+n:], s[index:])
 		copy(s[index:], e)
 		return s
 	}
-
-	if n < len(s)-index {
-		// ...**** + ooo ==> ...ooo$$$$
+	// S has not enough room, use append smartly to expand it when necessary.
+	if n < l-index {
+		// In this branch: ...**** + ooo ==> ...ooo$$$$
 		s = append(s, s[l-n:]...)
-		// ...*...$$$
+		// Now: ...*...$$$
 		copy(s[index+n:l], s[index:])
-		// ......$$$$
+		// Now: ......$$$$
 		copy(s[index:], e)
-		// ...ooo$$$$
+		// Now: ...ooo$$$$
 		return s
 	}
-
-	// ...*** + oooo ==> ...oooo$$$
+	// In this branch: ...*** + oooo ==> ...oooo$$$
 	s = append(append(s, e[l-index:]...), s[index:]...)
-	// ......o$$$
+	// Now: ......o$$$
 	copy(s[index:], e[:l-index])
-	// ...oooo$$$
+	// Now: ...oooo$$$
 	return s
 }

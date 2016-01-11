@@ -24,8 +24,24 @@ func ExampleCallbackFields() {
 	//   World
 }
 
-func TestCallbackFieldsFunc(t *testing.T) {
+func TestCallbackFieldsFunc_SepEnds(t *testing.T) {
 	s := " Hello  \tWorld,Go   "
+	var cnt int
+	var res string
+
+	CallbackFieldsFunc(s, func(r rune) bool {
+		return r == ' ' || r == '\t' || r == ','
+	}, func(n int) {
+		cnt = n
+	}, func(f string) {
+		res += "|" + f
+	})
+
+	assert.Equal(t, "res", res, "|Hello|World|Go")
+}
+
+func TestCallbackFieldsFunc_FieldEnds(t *testing.T) {
+	s := " Hello  \tWorld,Go"
 	var cnt int
 	var res string
 
@@ -51,10 +67,9 @@ func ExampleFullJoin() {
 }
 
 func TestFullJoin(t *testing.T) {
-	a := []string{
-		"item1", "item two",
-	}
-	assert.Equal(t, "FullJoin", FullJoin(a, "(", "), (", ")"), "(item1), (item two)")
+	assert.Equal(t, "FullJoin", FullJoin(nil, "(", "), (", ")"), "")
+	assert.Equal(t, "FullJoin", FullJoin([]string{"item"}, "(", "), (", ")"), "(item)")
+	assert.Equal(t, "FullJoin", FullJoin([]string{"item1", "item two"}, "(", "), (", ")"), "(item1), (item two)")
 }
 
 func TestCompare(t *testing.T) {
