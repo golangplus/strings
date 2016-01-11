@@ -90,3 +90,10 @@ func Compare(a, b string) int {
 	}
 	return 0
 }
+
+// LessFunc returns a closure for comparing elements of a string slice.
+func LessFunc(l []string) func(i, j int) bool {
+	return func(i, j int) bool {
+		return l[i] < l[j]
+	}
+}

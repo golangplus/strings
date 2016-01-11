@@ -77,3 +77,11 @@ func TestCompare(t *testing.T) {
 	assert.Equal(t, "Compare(def, ab)", Compare("def", "ab"), 1)
 	assert.Equal(t, "Compare(ab, ab)", Compare("ab", "ab"), 0)
 }
+
+func TestLessFunc(t *testing.T) {
+	l := []string{"a", "b", "c"}
+	less := LessFunc(l)
+	assert.True(t, "less", less(0, 1))
+	assert.False(t, "less", less(1, 1))
+	assert.False(t, "less", less(2, 1))
+}
