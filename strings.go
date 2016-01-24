@@ -99,6 +99,8 @@ func LessFunc(l []string) func(i, j int) bool {
 }
 
 // Ptr is a named type for *string. It's String() method safely generate a friendly results for the content.
+// Then the convinient way of print out a possible-nil *string value could be:
+//   fmt.Printf("%s", stringsp.Ptr{ps})
 type Ptr struct {
 	*string
 }
