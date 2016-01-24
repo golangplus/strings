@@ -97,3 +97,16 @@ func LessFunc(l []string) func(i, j int) bool {
 		return l[i] < l[j]
 	}
 }
+
+// Ptr is a named type for *string. It's String() method safely generate a friendly results for the content.
+type Ptr struct {
+	*string
+}
+
+// String returns a "<nil>" for nil pointer, and the content of the string for non-nil pointers.
+func (p Ptr) String() string {
+	if p.string == nil {
+		return "<nil>"
+	}
+	return *p.string
+}

@@ -85,3 +85,10 @@ func TestLessFunc(t *testing.T) {
 	assert.False(t, "less", less(1, 1))
 	assert.False(t, "less", less(2, 1))
 }
+
+func TestPtr(t *testing.T) {
+	assert.Equal(t, "Ptr(nil)", Ptr{nil}.String(), "<nil>")
+	s := "hello"
+	assert.Equal(t, "Ptr(&s)", Ptr{&s}.String(), s)
+	assert.Equal(t, "Sprintf(Ptr(&s))", fmt.Sprint(Ptr{&s}.String()), s)
+}
