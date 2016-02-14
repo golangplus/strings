@@ -8,6 +8,7 @@ Package stringsp is a plus to the standard "strings" package.
 package stringsp
 
 import (
+	"strings"
 	"unicode"
 
 	"github.com/golangplus/bytes"
@@ -98,17 +99,12 @@ func LessFunc(l []string) func(i, j int) bool {
 	}
 }
 
-// Ptr is a named type for *string. It's String() method safely generate a friendly results for the content.
-// Then the convinient way of print out a possible-nil *string value could be:
-//   fmt.Printf("%s", stringsp.Ptr{ps})
-type Ptr struct {
-	*string
-}
-
-// String returns a "<nil>" for nil pointer, and the content of the string for non-nil pointers.
-func (p Ptr) String() string {
-	if p.string == nil {
-		return "<nil>"
+// MatchPrefix checks whether the specified string has a prefix, if so a
+// string removing the prefix is returned; otherwise the original string
+// is returned
+func MatchPrefix(s, prefix string) (string, bool) {
+	if strings.HasPrefix(s, prefix) {
+		return s[len(prefix):], true
 	}
-	return *p.string
+	return s, false
 }

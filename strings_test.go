@@ -86,9 +86,12 @@ func TestLessFunc(t *testing.T) {
 	assert.False(t, "less", less(2, 1))
 }
 
-func TestPtr(t *testing.T) {
-	assert.Equal(t, "Ptr(nil)", Ptr{nil}.String(), "<nil>")
-	s := "hello"
-	assert.Equal(t, "Ptr(&s)", Ptr{&s}.String(), s)
-	assert.Equal(t, "Sprintf(Ptr(&s))", fmt.Sprint(Ptr{&s}.String()), s)
+func TestMatchPrefix(t *testing.T) {
+	res, ok := MatchPrefix("abc", "a")
+	assert.True(t, "ok", ok)
+	assert.Equal(t, "res", res, "bc")
+
+	res, ok = MatchPrefix("abc", "d")
+	assert.False(t, "ok", ok)
+	assert.Equal(t, "res", res, "abc")
 }
