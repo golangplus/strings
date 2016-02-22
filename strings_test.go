@@ -95,3 +95,11 @@ func TestMatchPrefix(t *testing.T) {
 	assert.False(t, "ok", ok)
 	assert.Equal(t, "res", res, "abc")
 }
+
+func TestGet(t *testing.T) {
+	assert.Equal(t, "Get(nil)", Get(nil), "")
+	s := ""
+	assert.Equal(t, "Get(&s)", Get(&s), "")
+	s = "abc"
+	assert.Equal(t, "Get(&s)", Get(&s), "abc")
+}
