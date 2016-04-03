@@ -103,3 +103,9 @@ func TestGet(t *testing.T) {
 	s = "abc"
 	assert.Equal(t, "Get(&s)", Get(&s), "abc")
 }
+
+func TestIndentLinesExceptFirst(t *testing.T) {
+	assert.Equal(t, "IndentLinesExceptFirst", IndentLinesExceptFirst("", " "), "")
+	assert.Equal(t, "IndentLinesExceptFirst", IndentLinesExceptFirst("line", " "), "line")
+	assert.Equal(t, "IndentLinesExceptFirst", IndentLinesExceptFirst("one\ntwo", " "), "one\n two")
+}

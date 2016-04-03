@@ -109,10 +109,17 @@ func MatchPrefix(s, prefix string) (string, bool) {
 	return s, false
 }
 
-// Get safely returns the pointed contents of a string pionter. Returns "" for a nil pointer.
+// Get safely returns the pointed contents of a string pionter. Returns ""
+// for a nil pointer.
 func Get(s *string) string {
 	if s == nil {
 		return ""
 	}
 	return *s
+}
+
+// IndentLinesExceptFirst appends a leading indent to each lines of the
+// string except the first line.
+func IndentLinesExceptFirst(s, indent string) string {
+	return strings.Replace(s, "\n", "\n"+indent, -1)
 }
